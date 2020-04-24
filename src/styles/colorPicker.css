@@ -1,0 +1,16 @@
+.color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 7px;
+    cursor: pointer;
+}
+.colorPicker {
+    margin-top: 5px;
+    width: 120px;
+    top: 10px;
+    display: flex;
+    text-decoration: none;
+    list-style-type: none;
+    float: left;
+}
