@@ -1,24 +1,20 @@
 import styles from '../styles/sorting.css';
 import React from 'react';
-import classNames from 'classnames/bind';
 
-let cx = classNames.bind(styles);
+const params = [
+    { label: 'по цвету', value: 'color', },
+    { label: 'по дате создания', value: 'date', },
+    { label: 'по названию', value: 'name' },
+];
 
 export default function Sorting(props) {
     return (
-        <select className={styles.sorting}>
-            {
-                sortingParams.map((param, key) => 
-                    <option key={key} className={sortingParams}>{param}</option>
+        <select className={styles.sorting}>  // onChange value
+            { 
+                params.map((param, key) => 
+                    <option key={key} className={styles.sortingParams}>{param.label}</option>
                 )
             }
         </select>
     );
 }
-
-const sortingParams = ['Сортировка по', 'по цвету', 'по дате создания', 'по названию'];
-
-let className = cx({
-    sortingParams: true,
-    
-});
