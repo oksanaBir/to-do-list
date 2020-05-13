@@ -1,10 +1,10 @@
 import styles from '../styles/noteDescription.css';
 import React, { Children } from 'react';
 
-export default function NoteDescription(props){
+export default function NoteDescription({children, handleClick}){
     return(
-        <textarea className={styles.noteDescription}>
-            {props.children}
+        <textarea className={styles.noteDescription} onChange={() => handleClick()}>
+            {children}
         </textarea>
     )
 }
