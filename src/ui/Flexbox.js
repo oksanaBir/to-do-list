@@ -7,10 +7,16 @@ export const flexPositions = {
     end: 'flex-end',
 }
 
+export const flexDirection = {
+    row: 'row',
+    column: 'column',
+}
+
 export function FlexBox({
     children,
     position = flexPositions.start,
     margin = 10,
+    direction = flexDirection.row,
 }) {
     return(
         <div
@@ -18,6 +24,7 @@ export function FlexBox({
             style={{
                 justifyContent: position,
                 margin: margin + 'px',
+                flexDirection: direction,
             }}
         >
             {children}
