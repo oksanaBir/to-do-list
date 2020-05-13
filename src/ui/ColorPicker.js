@@ -6,7 +6,12 @@ export default function ColorPicker({changeColor, colors}) {
         <ul className={styles.colorPicker}>
             {
                 colors.map((color, key) =>
-                    <li key={key} className={styles.color} onClick={() => changeColor(key)} style={{ backgroundColor: color }}></li>
+                    <li 
+                        key={key}
+                        className={styles.color}
+                        onClick={() => changeColor(key)}
+                        style={{ backgroundColor: color }}
+                    ></li>
                 )
             }
         </ul>
