@@ -1,10 +1,19 @@
 import styles from '../styles/button.css';
-import React from 'react'; 
+import React from 'react';
+import classNames from 'classnames/bind';
 
-export default function Button(props) {
+let cx = classNames.bind(styles);
+
+export default function Button({children, handleClick, isDanger = false}) {
     return (
-        <button className={styles.button}>
-            {props.children}
+        <button
+            className={cx({
+                button: true,
+                danger: isDanger,
+            })}
+            onClick={handleClick}
+        >
+            {children}
         </button>
-    )
+    );
 }
