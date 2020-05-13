@@ -1,14 +1,20 @@
 import React from 'react';
 import styles from '../styles/title.css';
 
-export default function Title({ children, contentEditable, handleChange }) {
+export default function Title({ value, contentEditable, handleClick }) {
     if(contentEditable){
         return (
-            <h2>{ children }</h2>
+            <input
+                className={styles.title}
+                maxLength="20"
+                value={value}
+                style={{ height: '22px' }}
+                onChange={() => handleClick()}
+            />      
         );
     } else {
         return(
-            <input className={styles.title} maxLength="20" onChange={handleChange} style={{ height: '22px' }}/>
+            <h2>{value}</h2>
         );
     }
 }
