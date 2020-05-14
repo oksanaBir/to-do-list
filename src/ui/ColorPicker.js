@@ -11,7 +11,7 @@ export default function ColorPicker({changeColor, colors}) {
                         className={styles.color}
                         onClick={() => changeColor(key)}
                         style={{ backgroundColor: color }}
-                    ></li>
+                    />
                 )
             }
         </ul>
