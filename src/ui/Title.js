@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from '../styles/title.css';
 
-export default function Title({ value, contentEditable, handleClick }) {
+export default function Title({value, contentEditable, handleChange}) {
     if(contentEditable){
         return (
             <input
@@ -9,7 +9,7 @@ export default function Title({ value, contentEditable, handleClick }) {
                 maxLength="20"
                 value={value}
                 style={{ height: '22px' }}
-                onChange={handleClick}
+                onChange={handleChange}
             />      
         );
     } else {
