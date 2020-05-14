@@ -3,7 +3,7 @@ import React, { Children } from 'react';
 
 export default function NoteDescription({children, handleClick}){
     return(
-        <textarea className={styles.noteDescription} onChange={() => handleClick()}>
+        <textarea className={styles.noteDescription} onChange={handleClick}>
             {children}
         </textarea>
     )
