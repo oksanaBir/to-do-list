@@ -12,14 +12,14 @@ export default function ComponentsGallery() {
     return (
         <>
             <Header>Заметки</Header>
-            <Sorting />
             <FlexBox direction={flexDirection.column} margin={10}>
+                <Sorting />
                 <Button>Добавить</Button>
+                <Button isDanger={true}>Удалить</Button>
                 <NoteWrapper />
-                <NoteDescription handleClick={() => console.log('')}/>
+                <NoteDescription handleChange={() => console.log('')}/>
                 <Title contentEditable={true}></Title>
-                <ColorPicker colors={['#F0F0F0', '#F288AF', '#134BF2', '#F2A516', '#F2490C']} changeColor={(key) => console.log(key)} />
-                <Button isDanger={true}>Удалить</Button>            
+                <ColorPicker colors={['#F0F0F0', '#F288AF', '#134BF2', '#F2A516', '#F2490C']} changeColor={(key) => console.log(key)} />         
             </FlexBox>
         </>
     );
