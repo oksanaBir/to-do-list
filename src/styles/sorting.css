@@ -1,11 +1,8 @@
 .sorting {
-    position: absolute;
     width: 150px;
-    top: 17px;
     background: #0D0D0D;
     color: #F2EDE4;
     list-style-type: none;
-    left: 1250px;
     padding: 10px;
 }
 .sortingParams {

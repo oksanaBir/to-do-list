@@ -7,7 +7,7 @@ const params = [
     { label: 'по названию', value: 'name' },
 ];
 
-export default function Sorting(handleClick) {
+export default function Sorting({handleChange}) {
     return (
         <select className={styles.sorting}>
             { 
@@ -16,7 +16,7 @@ export default function Sorting(handleClick) {
                         key={key}
                         className={styles.sortingParams}
                         value={param.value}
-                        onChange={handleClick}    
+                        onChange={handleChange}    
                     >{param.label}</option>
                 )
             }
