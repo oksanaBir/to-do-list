@@ -9,7 +9,7 @@ export default function Title({ value, contentEditable, handleClick }) {
                 maxLength="20"
                 value={value}
                 style={{ height: '22px' }}
-                onChange={() => handleClick()}
+                onChange={handleClick}
             />      
         );
     } else {
