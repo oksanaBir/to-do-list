@@ -7,12 +7,17 @@ const params = [
     { label: 'по названию', value: 'name' },
 ];
 
-export default function Sorting(props) {
+export default function Sorting(handleClick) {
     return (
-        <select className={styles.sorting}>  // onChange value
+        <select className={styles.sorting}>
             { 
                 params.map((param, key) => 
-                    <option key={key} className={styles.sortingParams}>{param.label}</option>
+                    <option
+                        key={key}
+                        className={styles.sortingParams}
+                        value={param.value}
+                        onChange={handleClick}    
+                    >{param.label}</option>
                 )
             }
         </select>
