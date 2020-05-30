@@ -7,7 +7,7 @@ const params = [
     { label: 'по названию', value: 'name' },
 ];
 
-export default function Sorting({handleChange}) {
+export default function Select({handleChange}) {
     return (
         <select className={styles.sorting}>
             { 
