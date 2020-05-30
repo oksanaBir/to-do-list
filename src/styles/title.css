@@ -1,6 +1,6 @@
 .title {
-    border: solid 1px #f0f0f0;
-    border-bottom: solid 1.5px #cfcfcf;
+    border: none;
+    border-bottom: solid 1px black;
     width: 200px;
     background-color: #f0f0f0;
     outline: none;
@@ -9,4 +9,6 @@
 }
 h2 {
     margin: 0px;
+    padding-top: 10px;
+    height: 20px;
 }
