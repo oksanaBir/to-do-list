@@ -18,16 +18,17 @@ export default class Note extends React.Component {
         this.props.editNote(noteId, 'isEditable', !isEditable)
     }
 
-    onTitleChange(noteId, newTitle) {
-        this.props.editNote(noteId, 'title', newTitle);
-        
+    onTitleChange(event, noteId) {
+        this.props.editNote(noteId, 'title', event.target.value);
     }
 
-
+    onDescriptionChange(event, noteId) {
+        this.props.editNote(noteId, 'description', event.target.value)
+    }
 
     render() {
         const { noteId, colors, note, deleteNote } = this.props;
-        const { isEditable } = note;
+        const { isEditable, title, description } = note;
         const activeColor = colors[note.color];
 
         return(
@@ -35,11 +36,14 @@ export default class Note extends React.Component {
                 <Title 
                     backgroundColor={activeColor}
                     contentEditable={isEditable}
-                    
+                    value={title}
+                    handleChange={(event) => this.onTitleChange(event, noteId)}             
                 ></Title>
                 <NoteDescription
                     contentEditable={isEditable}
                     backgroundColor={activeColor}
+                    value={description}
+                    handleChange={(event) => this.onDescriptionChange(event, noteId)}
                 />
                 {
                     isEditable &&
