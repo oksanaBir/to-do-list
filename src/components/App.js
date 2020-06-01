@@ -32,10 +32,10 @@ export default class App extends React.Component {
                 ...this.state.notes,
                 [Date.now().toString() + Math.random().toString()]: {
                     color: 0,
-                    title: ' ',
+                    title: '',
                     isEditable: true,
-                    value: ' ',
                     description: '',
+                    value: ''
                 }
             }
         });
@@ -77,7 +77,6 @@ export default class App extends React.Component {
                                     key={id}
                                     noteId={id}
                                     note={this.state.notes[id]}
-                                    changeColor={this.changeColor}
                                     colors={this.state.colors}
                                     deleteNote={this.deleteNote}
                                     editNote={this.editNote}
