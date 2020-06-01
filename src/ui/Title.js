@@ -13,7 +13,7 @@ export default function Title({value, contentEditable, handleChange, backgroundC
                     height: '22px',
                     backgroundColor
                 }}
-                onChange={handleChange}
+                onChange={() => handleChange(event)}
             />
         );
     } else {
