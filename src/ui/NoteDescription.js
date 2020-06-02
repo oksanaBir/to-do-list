@@ -22,9 +22,7 @@ export default function NoteDescription({value, handleChange, backgroundColor, c
                 disabled="disabled"
                 className={styles.noteDescription}
                 style={{ backgroundColor, paddingTop: '19px', height: '149px' }}
-            > {value.replace(/\n/g, '</ br>')}
-        
-            </span>
+            > {value.split('\n').map((str, key) => <p key={key} style={{ margin: '3px' }}> {str} </p>)} </span>
         );
     }
 }
