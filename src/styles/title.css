@@ -1,6 +1,5 @@
 .title {
     border: none;
-    border-bottom: solid 1px black;
     width: 200px;
     background-color: #f0f0f0;
     outline: none;
@@ -12,4 +11,8 @@ h2 {
     margin: 0px;
     padding-top: 10px;
     height: 20px;
+}
+
+.emptyValue {
+    border-bottom: red 1px solid;
 }

@@ -1,17 +1,24 @@
 import React from 'react';
 import styles from '../styles/title.css';
+import classNames from 'classnames/bind';
 
-export default function Title({value, contentEditable, handleChange, backgroundColor}) {
-    if(contentEditable){
+let cx = classNames.bind(styles);
+
+export default function Title({value, contentEditable, handleChange, backgroundColor, validation}) {
+    if(contentEditable) {
         return (
             <input
-                className={styles.title}
+                className={cx({
+                    emptyValue: !validation,
+                    title: true
+                })}
+                required="required"
                 placeholder="Заголовок"
                 maxLength="20"
                 value={value}
                 style={{ 
                     height: '22px',
-                    backgroundColor
+                    backgroundColor,
                 }}
                 onChange={() => handleChange(event)}
             />
