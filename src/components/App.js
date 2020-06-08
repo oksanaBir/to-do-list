@@ -3,15 +3,16 @@ import Note from './Note';
 import Button from '../ui/Button';
 import Header from '../ui/Header';
 import {FlexBox, flexPositions, flexDirection} from '../ui/Flexbox';
+import Sorting from './Sorting';
 
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             sortingParams: [
-                { label: 'по цвету', value: 'color', },
-                { label: 'по дате создания', value: 'date', },
-                { label: 'по названию', value: 'name' },
+                { label: 'по цвету', value: 'color',  },
+                { label: 'по дате создания', value: 'date',  },
+                { label: 'по названию', value: 'name',  },
             ],
             colors: ['#F0F0F0', '#F0D1E2', '#D0D8F5', '#F5E6BA', '#F5C0BA'],
             notes: {},
@@ -35,7 +36,9 @@ export default class App extends React.Component {
                     title: '',
                     isEditable: true,
                     description: '',
-                    value: ''
+                    date: '',
+                    titleValidation: false,
+                    dateValidation: false,
                 }
             }
         });
@@ -50,13 +53,14 @@ export default class App extends React.Component {
         });
     }
 
-    editNote(noteId, field, value) {
+    editNote(noteId, data) {
+        console.log('called');
         this.setState({
             notes: {
                 ...this.state.notes,
                 [noteId]: {
                     ...this.state.notes[noteId],
-                    [field]: value,
+                    ...data,
                 },
             },
         });
@@ -68,6 +72,9 @@ export default class App extends React.Component {
         return (
             <>
                 <Header>Заметки</Header>
+                <FlexBox position={flexPositions.end}>
+                    <Sorting sortingParams={this.state.sortingParams} />
+                </FlexBox>
                 <FlexBox direction={flexDirection.row}>
                     <Button handleClick={this.createNote}>Добавить</Button>
                     {
@@ -84,7 +91,6 @@ export default class App extends React.Component {
                             )
                         })
                     }
-                    {/* <Sorting sortingParams={this.state.sortingParams} /> */}
                 </FlexBox>
             </>
         );
