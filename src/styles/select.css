@@ -1,9 +1,10 @@
 .sorting {
-    width: 150px;
+    width: 169px;
     background: #0D0D0D;
     color: #F2EDE4;
     list-style-type: none;
     padding: 10px;
+    margin: 5px;
 }
 .sortingParams {
     padding: 20px;
