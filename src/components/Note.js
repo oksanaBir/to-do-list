@@ -84,7 +84,7 @@ export default class Note extends React.Component {
                     contentEditable={isEditable}
                     backgroundColor={activeColor}
                     value={description}
-                    handleChange={(event) => this.onDescriptionChange(event, noteId, validation)}
+                    handleChange={(event) => this.onDescriptionChange(event, noteId)}
                 />
                 {
                     isEditable &&

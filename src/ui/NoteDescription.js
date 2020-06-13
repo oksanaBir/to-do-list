@@ -1,16 +1,15 @@
 import styles from '../styles/noteDescription.css';
 import React from 'react';
 
-export default function NoteDescription({value, handleChange, backgroundColor, contentEditable}){
-    if(contentEditable){
-        return(
+export default function NoteDescription({value, handleChange, backgroundColor, contentEditable}) {
+    if(contentEditable) {
+        return (
             <textarea
                 className={styles.noteDescription}
                 onChange={() => handleChange(event)}
                 style={{ 
                     backgroundColor,
-                    ScrollbarBaseColor: backgroundColor,
-                    ScrollbarBaseColor: 'red'
+                    margin: '8px'
                 }}
                 placeholder="Текст заметки"
                 value={value}
@@ -18,11 +17,11 @@ export default function NoteDescription({value, handleChange, backgroundColor, c
         )
     } else {
         return (
-            <span
+            <textarea
                 disabled="disabled"
                 className={styles.noteDescription}
-                style={{ backgroundColor, paddingTop: '19px', height: '149px' }}
-            > {value.split('\n').map((str, key) => <p key={key} style={{ margin: '3px' }}> {str} </p>)} </span>
+                style={{ backgroundColor, height: '156px' }}
+            > {value.split('\n').map((str, key) => <p key={key} style={{ margin: '0px' }}> {str} </p>)} </textarea>
         );
     }
 }
