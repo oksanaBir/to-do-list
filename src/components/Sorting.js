@@ -2,9 +2,10 @@ import React from 'react';
 import Select from '../ui/Select';
 
 export const sortParams = [
-    { label: 'по цвету', value: 'color', },
+    { label: 'по дате создания', value: 'createDate'},
     { label: 'по дате выполнения', value: 'date', },
-    { label: 'по названию', value: 'name', },
+    { label: 'по цвету', value: 'color', },
+    { label: 'по названию', value: 'title', },
 ];
 
 export const addSortParams = [
@@ -34,7 +35,7 @@ export default class Sorting extends React.Component {
                 />
                 <Select
                     sortParams={
-                        this.props.value == 'date' ? dateSortParams : addSortParams
+                        this.props.value == 'date' || this.props.value == 'createDate' ? dateSortParams : addSortParams
                     }
                     value={this.props.additionalValue}
                     onChange={(event) => this.props.onSortDirectionChange(event)}
