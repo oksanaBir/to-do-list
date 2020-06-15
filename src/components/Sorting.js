@@ -3,25 +3,27 @@ import Select from '../ui/Select';
 
 export const sortParams = [
     { label: 'по дате создания', value: 'createDate'},
-    { label: 'по дате выполнения', value: 'date', },
+    { label: 'по дате выполнения', value: 'completionDate', },
     { label: 'по цвету', value: 'color', },
     { label: 'по названию', value: 'title', },
 ];
 
-export const addSortParams = [
-    { label: 'с начала', value: 'start', },
-    { label: 'с конца', value: 'end', },
+export const directionSortParams = [
+    { label: 'с начала', value: 'ASC', },
+    { label: 'с конца', value: 'DESC', },
 ];
-
-export const dateSortParams = [
-    { label: 'сначала новые', value: 'start', },
-    { label: 'сначала старые', value: 'end', },
-];
-
 
 export default class Sorting extends React.Component {
-    constructor(props){
-        super(props)
+    setSortField(event){
+        this.props.changeSort(
+            { sortField: event.target.value }
+        );
+    }
+
+    setSortDirection(event){
+        this.props.changeSort(
+            { sortDirection: event.target.value }
+        );
     }
 
     render(){
@@ -29,16 +31,14 @@ export default class Sorting extends React.Component {
             <>
                 <Select
                     sortParams={sortParams}
-                    value={this.props.value}
-                    onChange={(event) => this.props.onSortChange(event)}
+                    value={this.props.sortField}
+                    onChange={(event) => this.setSortField(event)}
                     label={this.props.label}
                 />
                 <Select
-                    sortParams={
-                        this.props.value == 'date' || this.props.value == 'createDate' ? dateSortParams : addSortParams
-                    }
-                    value={this.props.additionalValue}
-                    onChange={(event) => this.props.onSortDirectionChange(event)}
+                    sortParams={directionSortParams}
+                    value={this.props.sortDirection}
+                    onChange={(event) => this.setSortDirection(event)}
                 />
             </>
         );
