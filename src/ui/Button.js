@@ -4,14 +4,15 @@ import classNames from 'classnames/bind';
 
 let cx = classNames.bind(styles);
 
-export default function Button({children, handleClick, isDanger = false}) {
+export default function Button({children, onClick, isDanger = false, isBlock = false}) {
     return (
         <button
             className={cx({
                 button: true,
                 danger: isDanger,
+                block: isBlock,
             })}
-            onClick={handleClick}
+            onClick={onClick}
         >
             {children}
         </button>
