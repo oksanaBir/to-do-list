@@ -5,13 +5,12 @@ import Header from '../ui/Header';
 import {FlexBox, flexPositions, flexDirection} from '../ui/Flexbox';
 import Sorting from './Sorting';
 
-
 export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            sortBy: 'createDate',
-            sortingDirection: 'start',
+            sortField: 'createDate',
+            sortDirection: 'ASC',
             colors: ['#F0F0F0', '#F0D1E2', '#D0D8F5', '#F5E6BA', '#F5C0BA'],
             notes: {},
         }
@@ -19,12 +18,7 @@ export default class App extends React.Component {
         this.deleteNote = this.deleteNote.bind(this);
         this.createNote = this.createNote.bind(this);
         this.editNote = this.editNote.bind(this);
-        this.onSortChange = this.onSortChange.bind(this);
-        this.onSortDirectionChange = this.onSortDirectionChange.bind(this);
-    }
-
-    componentDidMount() {
-        this.createNote();
+        this.changeSort = this.changeSort.bind(this);
     }
 
     createNote() {
@@ -35,7 +29,7 @@ export default class App extends React.Component {
                     color: 0,
                     title: '',
                     createDate: Date.now(),
-                    date: '',
+                    completionDate: '',
                     isEditable: true,
                     description: '',
                     titleValidation: false,
@@ -46,41 +40,30 @@ export default class App extends React.Component {
     }
 
     deleteNote(noteId) {
-        delete this.state.notes[noteId]
+        const { [noteId]: _, ...newNotes } = this.state.notes; 
+        
         this.setState({
             notes: {
-                ...this.state.notes,
+                ...newNotes,
             }
         });
     }
 
-    editNote(noteId, data) {
-        this.setState({ 
+    editNote(noteId, newData) {
+        this.setState({
             notes: {
                 ...this.state.notes,
                 [noteId]: {
                     ...this.state.notes[noteId],
-                    ...data,
+                    ...newData,
                 },
             },
         });
     }
 
-    onSortChange(event) {
+    changeSort(newData) {
         this.setState({
-            sortBy: event.target.value,
-            notes: {
-                ...this.state.notes,
-            }
-        });
-    }
-
-    onSortDirectionChange(event) {
-        this.setState({
-            sortingDirection: event.target.value,
-            notes: {
-                ...this.state.notes,
-            }
+            ...newData
         });
     }
 
@@ -92,41 +75,34 @@ export default class App extends React.Component {
                 <Header>Заметки</Header>
                 <FlexBox position={flexPositions.end}>
                     <Sorting 
-                        onSortChange={this.onSortChange}
-                        value={this.state.sortBy}
-                        additionalValue={this.state.sortingDirection}
-                        onSortDirectionChange={this.onSortDirectionChange}
+                        changeSort={this.changeSort}
                     />
                 </FlexBox>
                 <FlexBox direction={flexDirection.row}>
-                    <Button handleClick={this.createNote}>Добавить</Button>
+                    <Button onClick={this.createNote}>Добавить</Button>
                     {
                         notesIds
-                        .sort((firstCompareValue, secondCompareValue) => {
-                            if(this.state.notes[firstCompareValue][this.state.sortBy] > this.state.notes[secondCompareValue][this.state.sortBy]){
-                                if(this.state.sortingDirection == 'start') {
-                                    return 1
-                                } else return -1
-                            }
-                            if(this.state.notes[firstCompareValue][this.state.sortBy] < this.state.notes[secondCompareValue][this.state.sortBy]) {
-                                if(this.state.sortingDirection == 'end') {
-                                    return 1
-                                } else return -1
-                            }
-                            return 0
-                        })
-                        .map(id => {
-                            return (
-                                <Note
-                                    key={id}
-                                    noteId={id}
-                                    note={this.state.notes[id]}
-                                    colors={this.state.colors}
-                                    deleteNote={this.deleteNote}
-                                    editNote={this.editNote}
-                                />
-                            )
-                        })
+                            .sort((firstCompareValue, secondCompareValue) => {
+                                if(this.state.notes[firstCompareValue][this.state.sortField] > this.state.notes[secondCompareValue][this.state.sortField]){
+                                    return this.state.sortDirection === 'ASC' ? 1 : -1
+                                }
+                                if(this.state.notes[firstCompareValue][this.state.sortField] < this.state.notes[secondCompareValue][this.state.sortField]) {
+                                    return this.state.sortDirection === 'DESC' ? 1 : -1
+                                }
+                                return 0
+                            })
+                            .map(id => {
+                                return (
+                                    <Note
+                                        key={id}
+                                        noteId={id}
+                                        note={this.state.notes[id]}
+                                        colors={this.state.colors}
+                                        deleteNote={this.deleteNote}
+                                        editNote={this.editNote}
+                                    />
+                                );
+                            })
                     }
                 </FlexBox>
             </>
