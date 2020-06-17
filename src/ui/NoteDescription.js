@@ -1,12 +1,12 @@
 import styles from '../styles/noteDescription.css';
 import React from 'react';
 
-export default function NoteDescription({value, handleChange, backgroundColor, contentEditable}) {
+export default function NoteDescription({value, onChange, backgroundColor, contentEditable}) {
     if(contentEditable) {
         return (
             <textarea
                 className={styles.noteDescription}
-                onChange={() => handleChange(event)}
+                onChange={(event) => onChange(event.target.value)}
                 style={{ 
                     backgroundColor,
                     margin: '8px'

@@ -14,15 +14,15 @@ export const directionSortParams = [
 ];
 
 export default class Sorting extends React.Component {
-    setSortField(event){
+    setSortField(value) {
         this.props.changeSort(
-            { sortField: event.target.value }
+            { sortField: value }
         );
     }
 
-    setSortDirection(event){
+    setSortDirection(value) {
         this.props.changeSort(
-            { sortDirection: event.target.value }
+            { sortDirection: value }
         );
     }
 
@@ -32,13 +32,13 @@ export default class Sorting extends React.Component {
                 <Select
                     sortParams={sortParams}
                     value={this.props.sortField}
-                    onChange={(event) => this.setSortField(event)}
+                    onChange={(value) => this.setSortField(value)}
                     label={this.props.label}
                 />
                 <Select
                     sortParams={directionSortParams}
                     value={this.props.sortDirection}
-                    onChange={(event) => this.setSortDirection(event)}
+                    onChange={(value) => this.setSortDirection(value)}
                 />
             </>
         );

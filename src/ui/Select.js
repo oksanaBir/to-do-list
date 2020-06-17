@@ -3,7 +3,7 @@ import React from 'react';
 
 export default function Select({onChange, sortParams, value}) {
     return (
-        <select className={styles.sort} onChange={() => onChange(event)} value={value}>
+        <select className={styles.sort} onChange={(event) => onChange(event.target.value)} value={value}>
             { 
                 sortParams.map((sortParam, key) => 
                     <option

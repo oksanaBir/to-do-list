@@ -7,10 +7,6 @@ import Button from '../ui/Button';
 import Date from '../ui/Date';
 
 export default class Note extends React.Component {
-    constructor(props){
-        super(props);
-    }
-
     onColorChange(noteId, newColor) {
         this.props.editNote(
             noteId,
@@ -22,82 +18,85 @@ export default class Note extends React.Component {
 
     onEditableChange(noteId, isEditable, titleValidation, dateValidation) {
         titleValidation & dateValidation === true &&
-            this.props.editNote(
-                noteId,
-                {
-                    isEditable: !isEditable
-                }
-            );
-        }
-
-    onTitleChange(event, noteId) {
         this.props.editNote(
             noteId,
             {
-                title: event.target.value,
-                titleValidation: event.target.value !== undefined,
+                isEditable: !isEditable
             }
         );
     }
 
-    onDescriptionChange(event, noteId) {
+    onTitleChange(value, noteId) {
         this.props.editNote(
             noteId,
             {
-                description: event.target.value,
+                title: value,
+                titleValidation: !(value.length === 0 || !value.trim()),
             }
         );
     }
 
-    onDateChange(event, noteId) {
+    onDescriptionChange(value, noteId) {
         this.props.editNote(
             noteId,
             {
-                date: event.target.value,
-                dateValidation: event.target.value !== undefined,
+                description: value,
+            }
+        );
+    }
+
+    onDateChange(value, noteId) {
+        this.props.editNote(
+            noteId,
+            {
+                completionDate: value,
+                dateValidation: value !== undefined,
             }
         );
     }
 
     render() {
         const { noteId, colors, note, deleteNote } = this.props;
-        const { isEditable, title, description, date, titleValidation, dateValidation } = note;
+        const { isEditable, title, description, completionDate, titleValidation, dateValidation, color } = note;
         const activeColor = colors[note.color];
 
         return(
             <NoteWrapper backgroundColor={activeColor}>
-                <Title 
+                <Title
                     backgroundColor={activeColor}
                     contentEditable={isEditable}
                     value={title}
                     validation={titleValidation}
-                    handleChange={(event) => this.onTitleChange(event, noteId)}
+                    onChange={(value) => this.onTitleChange(value, noteId)}
                     
                 ></Title>
                 <Date
                     contentEditable={isEditable}
-                    value={date}
-                    handleChange={(event) => this.onDateChange(event, noteId)}
+                    value={completionDate}
+                    onChange={(value) => this.onDateChange(value, noteId)}
                     validation={dateValidation}
                 />
                 <NoteDescription
                     contentEditable={isEditable}
                     backgroundColor={activeColor}
                     value={description}
-                    handleChange={(event) => this.onDescriptionChange(event, noteId)}
+                    onChange={(value) => this.onDescriptionChange(value, noteId)}
                 />
                 {
                     isEditable &&
                         <ColorPicker
                             changeColor={(newColor) => this.onColorChange(noteId, newColor)}
                             colors={colors}
-                            selectedColor={note.color}
+                            selectedColor={color}
                         />
                 }
-                <Button handleClick={() => this.onEditableChange(noteId, isEditable, titleValidation, dateValidation)}>
+                <Button
+                    onClick={() => this.onEditableChange(noteId, isEditable, titleValidation, dateValidation)}
+                    isBlock = { !(titleValidation & dateValidation) } 
+                > 
                     { isEditable ? 'Сохранить' : 'Изменить' }
                 </Button>
-                <Button handleClick={() => deleteNote(noteId)} isDanger={true}>Удалить</Button>
+                <Button onClick={() => deleteNote(noteId)} isDanger={true}>Удалить</Button>
             </NoteWrapper>
         );
     }

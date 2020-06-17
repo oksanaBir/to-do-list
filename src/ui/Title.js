@@ -4,12 +4,12 @@ import classNames from 'classnames/bind';
 
 let cx = classNames.bind(styles);
 
-export default function Title({value, contentEditable, handleChange, backgroundColor, validation}) {
+export default function Title({value, contentEditable, onChange, backgroundColor, validation}) {
     if(contentEditable) {
         return (
             <input
                 className={cx({
-                    emptyValue: !validation,
+                    error: !validation,
                     title: true
                 })}
                 required="required"
@@ -20,7 +20,7 @@ export default function Title({value, contentEditable, handleChange, backgroundC
                     height: '22px',
                     backgroundColor,
                 }}
-                onChange={() => handleChange(event)}
+                onChange={(event) => onChange(event.target.value)}
             />
         );
     } else {

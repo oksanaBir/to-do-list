@@ -4,23 +4,22 @@ import classNames from 'classnames/bind';
 
 let cx = classNames.bind(styles);
 
-export default function Date({value, contentEditable, handleChange, validation}){
+export default function Date({value, contentEditable, onChange, validation}){
     if (contentEditable) {
         return (
             <input
                 required="1"
                 type="date"
                 value={value}
-                onChange={() => handleChange(event)}
+                onChange={(event) => onChange(event.target.value)}
                 className={cx({
-                    emptyValue: !validation
+                    error: !validation
                 })}
             />
         );
     } else {
         return (
-        <p className={styles.date}>{value}</p>
+            <p className={styles.date}>{value}</p>
         );
     }
 }
-
