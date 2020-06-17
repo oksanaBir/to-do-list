@@ -3,6 +3,6 @@
     padding-top: 3px;
 }
 
-.emptyValue {
+.error {
     border: 1px red solid;
 }

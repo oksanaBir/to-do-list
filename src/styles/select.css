@@ -6,9 +6,11 @@
     padding: 10px;
     margin: 5px;
 }
+
 .sortParams {
     padding: 20px;
 }
+
 .mainParam {
     border: solid 1px red; 
 }
