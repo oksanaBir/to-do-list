@@ -25,8 +25,8 @@ class Note extends React.Component {
         this.props.changeNoteDescription(noteId, value);
     }
 
-    onDateChange(value, noteId) {
-        this.props.changeNoteDate(noteId, value);
+    onDateChange(date, noteId) {
+        this.props.changeNoteDate(noteId, date);
     }
 
     deleteNote(noteId) {
@@ -50,7 +50,7 @@ class Note extends React.Component {
                 <Date
                     contentEditable={isEditable}
                     value={completionDate}
-                    onChange={(value) => this.onDateChange(value, noteId)}
+                    onChange={(date) => this.onDateChange(date, noteId)}
                     validation={completionDateValidation}
                 />
                 <NoteDescription
@@ -90,7 +90,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     deleteNote: (noteId) => dispatch(deleteNote(noteId)),
     changeNoteColor: (noteId, activeColor) => dispatch(changeNoteColor(noteId, activeColor)),
-    changeNoteDate: (noteId, value) => dispatch(changeNoteDate(noteId, value)),
+    changeNoteDate: (noteId, date) => dispatch(changeNoteDate(noteId, date)),
     changeNoteTitle: (noteId, value) => dispatch(changeNoteTitle(noteId, value)),
     changeNoteDescription: (noteId, value) => dispatch(changeNoteDescription(noteId, value)),
     changeNoteEditable: (noteId, isEditable) => dispatch(changeNoteEditable(noteId, isEditable))

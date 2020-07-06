@@ -25,10 +25,10 @@ export const changeNoteDescription = (noteId, value) => ({
     noteId
 });
 
-export const changeNoteDate = (noteId, value) => ({
+export const changeNoteDate = (noteId, date) => ({
     type: CHANGE_NOTE_DATE,
-    completionDate: value,
-    completionDateValidation: value !== undefined,
+    completionDate: date,
+    completionDateValidation: date !== undefined,
     noteId
 });
 
