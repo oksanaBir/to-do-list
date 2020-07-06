@@ -4,102 +4,45 @@ import Button from '../ui/Button';
 import Header from '../ui/Header';
 import {FlexBox, flexPositions, flexDirection} from '../ui/Flexbox';
 import Sorting from './Sorting';
+import { connect } from 'react-redux';
+import { createNote } from '../store/actions';
 
-export default class App extends React.Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            sortField: 'createDate',
-            sortDirection: 'ASC',
-            colors: ['#F0F0F0', '#F0D1E2', '#D0D8F5', '#F5E6BA', '#F5C0BA'],
-            notes: {},
-        }
-
-        this.deleteNote = this.deleteNote.bind(this);
         this.createNote = this.createNote.bind(this);
-        this.editNote = this.editNote.bind(this);
-        this.changeSort = this.changeSort.bind(this);
     }
 
     createNote() {
-        this.setState({
-            notes: {
-                ...this.state.notes,
-                [Date.now().toString() + Math.random().toString()]: {
-                    color: 0,
-                    title: '',
-                    createDate: Date.now(),
-                    completionDate: '',
-                    isEditable: true,
-                    description: '',
-                    titleValidation: false,
-                    dateValidation: false,
-                }
-            }
-        });
-    }
-
-    deleteNote(noteId) {
-        const { [noteId]: _, ...newNotes } = this.state.notes; 
-        
-        this.setState({
-            notes: {
-                ...newNotes,
-            }
-        });
-    }
-
-    editNote(noteId, newData) {
-        this.setState({
-            notes: {
-                ...this.state.notes,
-                [noteId]: {
-                    ...this.state.notes[noteId],
-                    ...newData,
-                },
-            },
-        });
-    }
-
-    changeSort(newData) {
-        this.setState({
-            ...newData
-        });
+        this.props.createNote();
     }
 
     render() {
-        const notesIds = Object.keys(this.state.notes);
-
         return (
             <>
                 <Header>Заметки</Header>
                 <FlexBox position={flexPositions.end}>
-                    <Sorting 
-                        changeSort={this.changeSort}
-                    />
+                    <Sorting/>
                 </FlexBox>
                 <FlexBox direction={flexDirection.row}>
                     <Button onClick={this.createNote}>Добавить</Button>
                     {
-                        notesIds
+                        this.props.notes
                             .sort((firstCompareValue, secondCompareValue) => {
-                                if(this.state.notes[firstCompareValue][this.state.sortField] > this.state.notes[secondCompareValue][this.state.sortField]){
-                                    return this.state.sortDirection === 'ASC' ? 1 : -1
-                                }
-                                if(this.state.notes[firstCompareValue][this.state.sortField] < this.state.notes[secondCompareValue][this.state.sortField]) {
-                                    return this.state.sortDirection === 'DESC' ? 1 : -1
+                                if(firstCompareValue[this.props.sortField] > secondCompareValue[this.props.sortField]){
+                                    return this.props.sortDirection === 'ASC' ? 1 : -1
+                                } 
+                                if(firstCompareValue[this.props.sortField] < secondCompareValue[this.props.sortField]) {
+                                    return this.props.sortDirection === 'DESC' ? 1 : -1
                                 }
                                 return 0
                             })
-                            .map(id => {
+                            .map(note => {
                                 return (
                                     <Note
-                                        key={id}
-                                        noteId={id}
-                                        note={this.state.notes[id]}
-                                        colors={this.state.colors}
-                                        deleteNote={this.deleteNote}
-                                        editNote={this.editNote}
+                                        key={note.noteId}
+                                        note={note}
+                                        colors={this.props.colors}
                                     />
                                 );
                             })
@@ -109,3 +52,15 @@ export default class App extends React.Component {
         );
     }
 }
+
+const mapStateToProps = state => ({
+    notes: state.notes,
+    sortDirection: state.sortDirection,
+    sortField: state.sortField
+});
+
+const mapDispatchToProps = dispatch => ({
+    createNote: () => dispatch(createNote()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

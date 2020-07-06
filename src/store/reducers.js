@@ -1,46 +1,70 @@
-// import {changeNoteColor, changeNoteEditable, changeNoteTitle, changeNoteDescription, changeNoteDate, changeSortDirection, changeSortField, createNote } from './actions'
 import { CHANGE_NOTE_DATE, CHANGE_SORT_DIRECTION, CHANGE_SORT_FIELD, CHANGE_NOTE_EDITABLE, CHANGE_NOTE_TITLE, CREATE_NOTE, CHANGE_NOTE_COLOR, DELETE_NOTE, CHANGE_NOTE_DESCRIPTION } from './actionTypes'
 
 const initialState = {
-        sortField: 'createDate',
-        sortDirection: 'ASC',
-        colors: ['#F0F0F0', '#F0D1E2', '#D0D8F5', '#F5E6BA', '#F5C0BA'],
-        notes: [],
+    sortField: 'createDate',
+    sortDirection: 'ASC',
+    colors: ['#F0F0F0', '#F0D1E2', '#D0D8F5', '#F5E6BA', '#F5C0BA'],
+    notes: [],
 }
 
 export default function app(state = initialState, action){
     switch (action.type) {
         case CHANGE_NOTE_COLOR:
-            return { 
+            return {
                 ...state,
-                color: action.color,
-                noteId: action.noteId
+                notes: [
+                    ...state.notes.map((note) => {
+                        if (note.noteId === action.noteId) {
+                            note.color = action.color;
+                        } return note
+                    })
+                ]
             }
         case CHANGE_NOTE_EDITABLE:
             return {
                 ...state,
-                isEditable: action.isEditable,
-                noteId: action.noteId
+                notes: [
+                    ...state.notes.map((note) => {
+                        if (note.noteId === action.noteId) {
+                            note.isEditable = !(action.isEditable);
+                        } return note
+                    })
+                ]
             }
         case CHANGE_NOTE_TITLE:
             return {
                 ...state,
-                title: action.title,
-                titleValidation: action.titleValidation,
-                noteId: action.noteId
+                notes: [
+                    ...state.notes.map((note) => {
+                        if (note.noteId === action.noteId) {
+                            note.title = action.title;
+                            note.titleValidation = action.titleValidation;
+                        } return note
+                    })
+                ]
             }
         case CHANGE_NOTE_DESCRIPTION:
             return {
                 ...state,
-                description: action.description,
-                noteId: action.noteId
+                notes: [
+                    ...state.notes.map((note) => {
+                        if (note.noteId === action.noteId) {
+                            note.description = action.description;
+                        } return note
+                    })
+                ]
             }
         case CHANGE_NOTE_DATE:
             return {
                 ...state,
-                completionDate: action.completionDate,
-                dateValidation: action.dateValidation,
-                noteId: action.noteId
+                notes: [
+                    ...state.notes.map((note) => {
+                        if (note.noteId === action.noteId) {
+                            note.completionDate = action.completionDate;
+                            note.completionDateValidation = action.completionDateValidation;
+                        } return note
+                    })
+                ]
             }
         case CHANGE_SORT_DIRECTION:
             return {
@@ -55,23 +79,27 @@ export default function app(state = initialState, action){
         case CREATE_NOTE:
             return {
                 ...state,
-                notes: {
-                    noteId: action.noteId,
-                    color: action.color,
-                    title: action.title,
-                    createDate: action.createDate,
-                    completionDate: action.completionDate,
-                    isEditable: action.isEditable,
-                    description: action.description,
-                    titleValidation: action.titleValidation,
-                    dateValidation: action.dateValidation
-                }
+                notes: [
+                    ...state.notes,
+                    {
+                        noteId: action.noteId,
+                        color: 0,
+                        title: 'New Note',
+                        createDate: action.createDate,
+                        completionDate: '',
+                        isEditable: true,
+                        description: '',
+                        titleValidation: true,
+                        completionDateValidation: false,
+                    }
+                ]
             }
-        case DELETE_NOTE:
+        case DELETE_NOTE: {
             return {
                 ...state,
-                noteId
+                notes: state.notes.filter(note => note.noteId !== action.noteId),
             }
+        }
         default:
             return state
     }

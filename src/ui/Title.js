@@ -14,7 +14,7 @@ export default function Title({value, contentEditable, onChange, backgroundColor
                 })}
                 required="required"
                 placeholder="Заголовок"
-                maxLength="20"
+                maxLength="14"
                 value={value}
                 style={{ 
                     height: '22px',

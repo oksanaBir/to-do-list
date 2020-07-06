@@ -5,60 +5,37 @@ import Title from '../ui/Title';
 import NoteDescription from '../ui/NoteDescription';
 import Button from '../ui/Button';
 import Date from '../ui/Date';
+import { connect } from 'react-redux';
+import { deleteNote, changeNoteColor, changeNoteEditable, changeNoteTitle, changeNoteDescription, changeNoteDate } from '../store/actions';
 
-export default class Note extends React.Component {
-    onColorChange(noteId, newColor) {
-        this.props.editNote(
-            noteId,
-            {
-                color: newColor,
-            }
-        );
+class Note extends React.Component {
+    onColorChange(noteId, activeColor) {
+        this.props.changeNoteColor(noteId, activeColor);
     }
 
-    onEditableChange(noteId, isEditable, titleValidation, dateValidation) {
-        titleValidation & dateValidation === true &&
-        this.props.editNote(
-            noteId,
-            {
-                isEditable: !isEditable
-            }
-        );
+    onEditableChange(noteId, isEditable) {
+        this.props.changeNoteEditable(isEditable, noteId);
     }
 
     onTitleChange(value, noteId) {
-        this.props.editNote(
-            noteId,
-            {
-                title: value,
-                titleValidation: !(value.length === 0 || !value.trim()),
-            }
-        );
+        this.props.changeNoteTitle(noteId, value);
     }
 
     onDescriptionChange(value, noteId) {
-        this.props.editNote(
-            noteId,
-            {
-                description: value,
-            }
-        );
+        this.props.changeNoteDescription(noteId, value);
     }
 
     onDateChange(value, noteId) {
-        this.props.editNote(
-            noteId,
-            {
-                completionDate: value,
-                dateValidation: value !== undefined,
-            }
-        );
+        this.props.changeNoteDate(noteId, value);
+    }
+
+    deleteNote(noteId) {
+        this.props.deleteNote(noteId);
     }
 
     render() {
-        const { noteId, colors, note, deleteNote } = this.props;
-        const { isEditable, title, description, completionDate, titleValidation, dateValidation, color } = note;
-        const activeColor = colors[note.color];
+        const { noteId, isEditable, title, description, completionDate, titleValidation, completionDateValidation, color } = this.props.note;
+        const activeColor = this.props.colors[this.props.note.color];
 
         return(
             <NoteWrapper backgroundColor={activeColor}>
@@ -74,7 +51,7 @@ export default class Note extends React.Component {
                     contentEditable={isEditable}
                     value={completionDate}
                     onChange={(value) => this.onDateChange(value, noteId)}
-                    validation={dateValidation}
+                    validation={completionDateValidation}
                 />
                 <NoteDescription
                     contentEditable={isEditable}
@@ -85,19 +62,38 @@ export default class Note extends React.Component {
                 {
                     isEditable &&
                         <ColorPicker
-                            changeColor={(newColor) => this.onColorChange(noteId, newColor)}
-                            colors={colors}
+                            changeColor={(activeColor) => this.onColorChange(noteId, activeColor)}
+                            colors={this.props.colors}
                             selectedColor={color}
                         />
                 }
                 <Button
-                    onClick={() => this.onEditableChange(noteId, isEditable, titleValidation, dateValidation)}
-                    isBlock = { !(titleValidation & dateValidation) } 
+                    onClick={() => this.onEditableChange(noteId, isEditable)}
+                    disabled={
+                        titleValidation === false ||
+                        completionDateValidation === false
+                    }
                 > 
                     { isEditable ? 'Сохранить' : 'Изменить' }
                 </Button>
-                <Button onClick={() => deleteNote(noteId)} isDanger={true}>Удалить</Button>
+                <Button onClick={() => this.deleteNote(noteId)} isDanger={true}>Удалить</Button>
             </NoteWrapper>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    notes: state.notes,
+    colors: state.colors,
+});
+
+const mapDispatchToProps = dispatch => ({
+    deleteNote: (noteId) => dispatch(deleteNote(noteId)),
+    changeNoteColor: (noteId, activeColor) => dispatch(changeNoteColor(noteId, activeColor)),
+    changeNoteDate: (noteId, value) => dispatch(changeNoteDate(noteId, value)),
+    changeNoteTitle: (noteId, value) => dispatch(changeNoteTitle(noteId, value)),
+    changeNoteDescription: (noteId, value) => dispatch(changeNoteDescription(noteId, value)),
+    changeNoteEditable: (noteId, isEditable) => dispatch(changeNoteEditable(noteId, isEditable))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Note);
