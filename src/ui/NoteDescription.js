@@ -20,7 +20,7 @@ export default function NoteDescription({value, onChange, backgroundColor, conte
             <textarea
                 disabled="disabled"
                 className={styles.noteDescription}
-                style={{ backgroundColor, height: '156px' }}
+                style={{ backgroundColor, height: '170px', width: '226px' }}
             > {value.split('\n').map((str, key) => <p key={key} style={{ margin: '0px' }}> {str} </p>)} </textarea>
         );
     }

@@ -10,7 +10,7 @@ export default function Button({children, onClick, isDanger = false, disabled = 
             className={cx({
                 button: true,
                 danger: isDanger,
-                block: disabled,
+                disabled: disabled,
             })}
             onClick={onClick}
             disabled={disabled}

@@ -1,13 +1,13 @@
 .button {
     background-color: #0D0D0D;
     color: #F2EDE4;
-    width: 90px;
-    margin: 4px;
+    margin: 2px;
     cursor: pointer;
     border: 1px solid #0D0D0D;
     font-size: 15px;
     height: 40px;
     outline: none;
+    padding: 0 20px 0 20px;
 }
 
 .danger {
@@ -15,6 +15,6 @@
     border: 1px solid red;
 }
 
-.block {
+.disabled {
     opacity: 0.7;
 }
