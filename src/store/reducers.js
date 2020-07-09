@@ -1,4 +1,14 @@
-import { CHANGE_NOTE_DATE, CHANGE_SORT_DIRECTION, CHANGE_SORT_FIELD, CHANGE_NOTE_EDITABLE, CHANGE_NOTE_TITLE, CREATE_NOTE, CHANGE_NOTE_COLOR, DELETE_NOTE, CHANGE_NOTE_DESCRIPTION } from './actionTypes'
+import { 
+    CHANGE_NOTE_DATE,
+    CHANGE_SORT_DIRECTION,
+    CHANGE_SORT_FIELD,
+    CHANGE_NOTE_EDITABLE,
+    CHANGE_NOTE_TITLE,
+    CREATE_NOTE,
+    CHANGE_NOTE_COLOR,
+    DELETE_NOTE,
+    CHANGE_NOTE_DESCRIPTION
+} from './actionTypes'
 
 const initialState = {
     sortField: 'createDate',
@@ -15,7 +25,10 @@ export default function app(state = initialState, action){
                 notes: [
                     ...state.notes.map((note) => {
                         if (note.noteId === action.noteId) {
-                            note.color = action.color;
+                            return {
+                                ...note,
+                                color: action.color,
+                            }
                         } return note
                     })
                 ]
@@ -26,7 +39,10 @@ export default function app(state = initialState, action){
                 notes: [
                     ...state.notes.map((note) => {
                         if (note.noteId === action.noteId) {
-                            note.isEditable = !(action.isEditable);
+                            return {
+                                ...note,
+                                isEditable: !action.isEditable,
+                            }
                         } return note
                     })
                 ]
@@ -37,8 +53,11 @@ export default function app(state = initialState, action){
                 notes: [
                     ...state.notes.map((note) => {
                         if (note.noteId === action.noteId) {
-                            note.title = action.title;
-                            note.titleValidation = action.titleValidation;
+                            return {
+                                ...note,
+                                title: action.title,
+                                titleValidation: action.titleValidation,
+                            }
                         } return note
                     })
                 ]
@@ -49,7 +68,10 @@ export default function app(state = initialState, action){
                 notes: [
                     ...state.notes.map((note) => {
                         if (note.noteId === action.noteId) {
-                            note.description = action.description;
+                            return {
+                                ...note,
+                                description: action.description,
+                            }
                         } return note
                     })
                 ]
@@ -60,9 +82,12 @@ export default function app(state = initialState, action){
                 notes: [
                     ...state.notes.map((note) => {
                         if (note.noteId === action.noteId) {
-                            note.completionDate = action.completionDate;
-                            note.completionDateValidation = action.completionDateValidation;
-                        } return note
+                            return {
+                                ...note,
+                                completionDate: action.completionDate,
+                            }
+                        }
+                        return note;
                     })
                 ]
             }
@@ -86,11 +111,10 @@ export default function app(state = initialState, action){
                         color: 0,
                         title: 'New Note',
                         createDate: action.createDate,
-                        completionDate: '',
+                        completionDate: action.completionDate,
                         isEditable: true,
                         description: '',
                         titleValidation: true,
-                        completionDateValidation: false,
                     }
                 ]
             }
