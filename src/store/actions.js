@@ -1,35 +1,44 @@
-import { CHANGE_NOTE_COLOR, CHANGE_NOTE_EDITABLE, CHANGE_NOTE_TITLE, CHANGE_NOTE_DESCRIPTION, CHANGE_NOTE_DATE, CHANGE_SORT_DIRECTION, CHANGE_SORT_FIELD, CREATE_NOTE, DELETE_NOTE } from './actionTypes';
+import {
+    CHANGE_NOTE_COLOR,
+    CHANGE_NOTE_EDITABLE,
+    CHANGE_NOTE_TITLE,
+    CHANGE_NOTE_DESCRIPTION,
+    CHANGE_NOTE_DATE,
+    CHANGE_SORT_DIRECTION,
+    CHANGE_SORT_FIELD,
+    CREATE_NOTE,
+    DELETE_NOTE
+} from './actionTypes';
 
 export const changeNoteColor = (noteId, activeColor) => ({  
+    noteId,
     type: CHANGE_NOTE_COLOR,
     color: activeColor,
-    noteId
 });
 
-export const changeNoteEditable = (isEditable, noteId) => ({
+export const changeNoteEditable = (noteId, isEditable) => ({
+    noteId,
     type: CHANGE_NOTE_EDITABLE,
     isEditable: isEditable,
-    noteId,
 });
 
 export const changeNoteTitle = (noteId, value) => ({
-    type: CHANGE_NOTE_TITLE,
     noteId,
+    type: CHANGE_NOTE_TITLE,
     title: value,
     titleValidation: !(value.length === 0 || !value.trim()),
 });
 
 export const changeNoteDescription = (noteId, value) => ({
+    noteId,
     type: CHANGE_NOTE_DESCRIPTION,
     description: value,
-    noteId
 });
 
-export const changeNoteDate = (noteId, date) => ({
+export const changeNoteDate = (noteId, value) => ({
+    noteId,
     type: CHANGE_NOTE_DATE,
-    completionDate: date,
-    completionDateValidation: date !== undefined,
-    noteId
+    completionDate: value,
 });
 
 export const changeSortDirection = value => ({
@@ -43,12 +52,13 @@ export const changeSortField = value => ({
 });
 
 export const deleteNote = noteId => ({
-    type: DELETE_NOTE,
     noteId,
+    type: DELETE_NOTE,
 });
 
 export const createNote = () => ({
-    type: CREATE_NOTE,
     noteId: Date.now().toString() + Math.random().toString(),
+    type: CREATE_NOTE,
+    completionDate: Date.now(),
     createDate: Date.now(),
 });
