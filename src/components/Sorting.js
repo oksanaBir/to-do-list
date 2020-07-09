@@ -16,27 +16,18 @@ const directionSortParams = [
 ];
 
 class Sorting extends React.Component {
-    setSortField(value) {
-        this.props.changeSortField(value);
-    }
-
-    setSortDirection(value) {
-        this.props.changeSortDirection(value);
-    }
-
     render(){
         return(
             <>
                 <Select
                     sortParams={sortParams}
                     value={this.props.sortField}
-                    onChange={(value) => this.setSortField(value)}
-                    label={this.props.label}
+                    onChange={(value) => this.props.changeSortField(value)}
                 />
                 <Select
                     sortParams={directionSortParams}
                     value={this.props.sortDirection}
-                    onChange={(value) => this.setSortDirection(value)}
+                    onChange={(value) => this.props.changeSortDirection(value)}
                 />
             </>
         );
