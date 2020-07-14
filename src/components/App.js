@@ -1,4 +1,5 @@
 import React from 'react';
+import EditableNote from './EditableNote';
 import Note from './Note';
 import Button from '../ui/Button';
 import Header from '../ui/Header';
@@ -8,10 +9,6 @@ import { connect } from 'react-redux';
 import { createNote } from '../store/actions';
 
 class App extends React.Component {
-    createNote() {
-        this.props.createNote();
-    }
-
     render() {
         return (
             <>
@@ -19,12 +16,14 @@ class App extends React.Component {
                 <FlexBox position={flexPositions.end}>
                     <Sorting/>
                 </FlexBox>
-                <Button
-                    onClick={this.props.createNote}
-                    disabled={
-                        this.props.notes.some((note) => note.isEditable === true)
-                    }
-                >Добавить</Button>
+                <FlexBox position={flexPositions.start}>
+                    <Button
+                        onClick={this.props.createNote}
+                        disabled={
+                            this.props.notes.some((note) => note.isEditable === true)
+                        }
+                    >Добавить</Button>
+                </FlexBox>
                 <FlexBox direction={flexDirection.row}>
                 {
                     this.props.notes
@@ -38,12 +37,21 @@ class App extends React.Component {
                             return 0
                         })
                         .map((note) => {
-                            return (
-                                <Note
-                                    key={note.noteId}
-                                    note={note}
-                                />
-                            );
+                            if (note.isEditable) {
+                               return (
+                                    <EditableNote
+                                        key={note.noteId}
+                                        note={note}
+                                    />
+                               );
+                            } else {
+                                return (
+                                    <Note
+                                        key={note.noteId}
+                                        note={note}
+                                    />
+                                );
+                            }
                         })
                 }
                 </FlexBox>

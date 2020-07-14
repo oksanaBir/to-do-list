@@ -9,7 +9,8 @@ export default function NoteDescription({value, onChange, backgroundColor, conte
                 onChange={(event) => onChange(event.target.value)}
                 style={{ 
                     backgroundColor,
-                    margin: '8px'
+                    margin: '8px',
+
                 }}
                 placeholder="Текст заметки"
                 value={value}
@@ -19,8 +20,9 @@ export default function NoteDescription({value, onChange, backgroundColor, conte
         return (
             <textarea
                 disabled="disabled"
+                value={value}
                 className={styles.noteDescription}
-                style={{ backgroundColor, height: '170px', width: '226px' }}
+                style={{ backgroundColor }}
             > {value.split('\n').map((str, key) => <p key={key} style={{ margin: '0px' }}> {str} </p>)} </textarea>
         );
     }

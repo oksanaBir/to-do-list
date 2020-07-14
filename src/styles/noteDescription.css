@@ -2,12 +2,12 @@
     display: inline-block;
     position: relative;
     font-size: 16px;
-    width: 210px;
-    border: none;
+    width: auto;
+    height: 100%;
+    border: 220px;
     background-color: #f0f0f0;
     outline: none;
     resize: none;
-    height: 98px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: left;
 }
