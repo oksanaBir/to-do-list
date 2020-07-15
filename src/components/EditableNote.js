@@ -30,7 +30,10 @@ class Note extends React.Component {
         const activeColor = this.props.colorPicker[this.props.note.color];
 
         return(
-            <NoteWrapper backgroundColor={activeColor} contentEditable={isEditable}>
+            <NoteWrapper
+                backgroundColor={activeColor}
+                contentEditable={isEditable}
+            >
                 <Title
                     backgroundColor={activeColor}
                     contentEditable={isEditable}
@@ -44,7 +47,7 @@ class Note extends React.Component {
                     onChange={(value) => this.props.changeNoteDate(noteId, value)}
                 />
                 <NoteDescription
-                    contentEditable={isEditable}
+                    disabled="disabled"
                     backgroundColor={activeColor}
                     value={description}
                     onChange={(value) => this.props.changeNoteDescription(noteId, value)}
