@@ -1,4 +1,4 @@
-import styles from '../styles/button.css';
+import styles from '../styles/button.less';
 import React from 'react';
 import classNames from 'classnames/bind';
 
