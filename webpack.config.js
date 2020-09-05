@@ -26,7 +26,7 @@ module.exports = {
         }
       },
       {
-        test: /\.less$/,
+        test: /\.css$/,
         use: [
           "style-loader",
           {
@@ -35,12 +35,25 @@ module.exports = {
               modules: true
             }
           },
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+          },
           {
             loader: 'less-loader',
             options: {
-              modules: true,
-            },
-           }
+              lessOptions: {
+                strictMath: true,
+              }
+            }
+          }
         ]
       },
       {
