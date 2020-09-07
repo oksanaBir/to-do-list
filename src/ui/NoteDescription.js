@@ -1,4 +1,4 @@
-import styles from '../styles/noteDescription.css';
+import styles from '../styles/noteDescription.less';
 import React from 'react';
 
 export default function NoteDescription({value, onChange, backgroundColor, contentEditable}) {
@@ -10,7 +10,6 @@ export default function NoteDescription({value, onChange, backgroundColor, conte
                 style={{ 
                     backgroundColor,
                     margin: '8px',
-
                 }}
                 placeholder="Текст заметки"
                 value={value}
