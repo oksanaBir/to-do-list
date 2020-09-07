@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/date.css';
+import styles from '../styles/date.less';
 import ReactDatePicker from 'react-datepicker';
 
 export default function DatePicker({value, contentEditable, onChange}){
