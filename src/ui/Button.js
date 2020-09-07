@@ -7,11 +7,13 @@ let cx = classNames.bind(styles);
 export default function Button({children, onClick, isDanger = false, disabled = false}) {
     return (
         <button
-            className={cx({
-                button: true,
-                danger: isDanger,
-                disabled: disabled,
-            })}
+            className={cx(
+                'button',
+                {
+                    isDanger,
+                    disabled,
+                }
+            )}
             onClick={onClick}
             disabled={disabled}
         >
