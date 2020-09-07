@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/flexbox.css';
+import styles from '../styles/flexbox.less';
 
 export const flexPositions = {
     start: 'flex-start',
