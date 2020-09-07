@@ -1,4 +1,4 @@
-import styles from '../styles/select.css';
+import styles from '../styles/select.less';
 import React from 'react';
 
 export default function Select({onChange, sortParams, value}) {
