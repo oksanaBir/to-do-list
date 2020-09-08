@@ -1,5 +1,5 @@
 import React from 'react';
-import "../styles/main.less";
+import "../styles/styles.less";
 import EditableNote from './EditableNote';
 import Note from './Note';
 import Button from '../ui/Button';
