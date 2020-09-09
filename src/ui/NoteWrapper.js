@@ -1,18 +1,15 @@
-import styles from '../styles/noteWrapper.less';
 import React from 'react';
-import classNames from 'classnames/bind';
-
-const cx = classNames.bind(styles);
+import classNames from 'classnames';
 
 export default function NoteWrapper({children, backgroundColor, contentEditable}) {
-    let className = cx(
+    let className = classNames(
         'note',
-        { editableNote: contentEditable },
+        { editable: contentEditable },
     );
 
     return (
         <div
-            className={className}
+            className={classNames(className)}
             style={{ backgroundColor }} 
         >
             {children}

@@ -1,5 +1,3 @@
-@import "./styles";
-
 .note {
     background-color: @white;
     box-shadow: -2px 3px 5px 0px rgba(0,0,0,0.75);
@@ -7,15 +5,15 @@
     text-align: left;
     word-break: break-all;
     margin: 18px;
-    padding: @padding / 2;
+    padding: calc(@padding / 2);
     text-align: center;
     display: flex;
     flex-direction: column;
     height: 300px;
     width: 250px;
-}
 
-.editableNote {
-    height: 400px;
-    width: 350px;
+    &.editable {
+        height: 400px;
+        width: 350px;    
+    }
 }
