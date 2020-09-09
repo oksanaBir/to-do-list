@@ -1,17 +1,14 @@
-@import "./styles";
-
 .color {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     margin-left: 7px;
     cursor: pointer;
+    &.selected {
+        border: @classic;
+    }
 }
-
-.selectedColor {
-    border: @classic;
-}
-
+    
 .colorPicker {
     width: 140px;
     display: flex;

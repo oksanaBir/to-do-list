@@ -1,19 +1,19 @@
 import React from 'react';
-import styles from '../styles/colorPicker.less';
+// import styles from '../styles/colorPicker.less';
 import classNames from 'classnames/bind';
 
-let cx = classNames.bind(styles);
+// let cx = classNames.bind(styles);
 
 export default function ColorPicker({changeColor, colors, selectedColor}) {
     return (
-        <ul className={styles.colorPicker}>
+        <ul className={classNames('colorPicker')}>
             {
                 colors.map((color, key) =>
                     <li 
                         key={key}
-                        className={cx(
+                        className={classNames(
                             'color',
-                            { selectedColor: key === selectedColor },
+                            { selected: key === selectedColor },
                         )}
                         style={{ backgroundColor: color }}
                         onClick={() => changeColor(key)}
