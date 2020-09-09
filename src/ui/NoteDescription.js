@@ -1,11 +1,11 @@
-import styles from '../styles/noteDescription.less';
 import React from 'react';
+import classNames from 'classnames';
 
 export default function NoteDescription({value, onChange, backgroundColor, contentEditable}) {
     if(contentEditable) {
         return (
             <textarea
-                className={styles.noteDescription}
+                className={classNames('noteDescription')}
                 onChange={(event) => onChange(event.target.value)}
                 style={{ 
                     backgroundColor,
@@ -20,7 +20,7 @@ export default function NoteDescription({value, onChange, backgroundColor, conte
             <textarea
                 disabled="disabled"
                 value={value}
-                className={styles.noteDescription}
+                className={classNames('noteDescription')}
                 style={{ backgroundColor }}
             > {value.split('\n').map((str, key) => <p key={key} style={{ margin: '0px' }}> {str} </p>)} </textarea>
         );
