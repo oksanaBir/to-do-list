@@ -47,7 +47,7 @@ class Note extends React.Component {
                     onChange={(value) => this.props.changeNoteDate(noteId, value)}
                 />
                 <NoteDescription
-                    disabled="disabled"
+                    contentEditable={isEditable}
                     backgroundColor={activeColor}
                     value={description}
                     onChange={(value) => this.props.changeNoteDescription(noteId, value)}
