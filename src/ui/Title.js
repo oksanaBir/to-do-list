@@ -1,14 +1,11 @@
 import React from 'react';
-import styles from '../styles/title.less';
 import classNames from 'classnames/bind';
-
-let cx = classNames.bind(styles);
 
 export default function Title({value, contentEditable, onChange, backgroundColor, validation}) {
     if(contentEditable) {
         return (
             <input
-                className={cx({
+                className={classNames({
                     error: !validation,
                     title: true
                 })}
