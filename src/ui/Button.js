@@ -1,16 +1,13 @@
-import styles from '../styles/button.less';
 import React from 'react';
-import classNames from 'classnames/bind';
+import classNames from 'classnames';
 
-let cx = classNames.bind(styles);
-
-export default function Button({children, onClick, isDanger = false, disabled = false}) {
+export default function Button({children, onClick, danger = false, disabled = false}) {
     return (
         <button
-            className={cx(
+            className={classNames(
                 'button',
                 {
-                    isDanger,
+                    danger,
                     disabled,
                 }
             )}

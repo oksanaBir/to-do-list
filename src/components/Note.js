@@ -44,7 +44,7 @@ class Note extends React.Component {
                     >Изменить</Button>
                     <Button
                         onClick={() => this.props.deleteNote(noteId)}
-                        isDanger
+                        danger
                     >Удалить</Button>
                 </FlexBox>
             </NoteWrapper>
