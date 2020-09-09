@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../styles/date.less';
 import ReactDatePicker from 'react-datepicker';
+import classNames from 'classnames';
 
 export default function DatePicker({value, contentEditable, onChange}){
     if (contentEditable) {
@@ -13,7 +13,7 @@ export default function DatePicker({value, contentEditable, onChange}){
         );
     } else {
         return (
-            <p className={styles.date}>{ new Date(value).toLocaleDateString() }</p>
+            <p className={classNames.date}>{ new Date(value).toLocaleDateString() }</p>
         );
     }
 }
