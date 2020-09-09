@@ -1,8 +1,8 @@
 import React from 'react';
-import styles from '../styles/header.less';
+import classNames from 'classnames';
 
 export default function Header({children}){
     return (
-        <div className={styles.header}>{children}</div>
+        <div className={classNames('header')}>{children}</div>
     );
 }
