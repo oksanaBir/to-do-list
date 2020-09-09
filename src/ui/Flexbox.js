@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/flexbox.less';
+import classNames from 'classnames';
 
 export const flexPositions = {
     start: 'flex-start',
@@ -20,7 +20,7 @@ export function FlexBox({
 }) {
     return(
         <div
-            className={styles.flexbox}
+            className={classNames('flexbox')}
             style={{
                 justifyContent: position,
                 margin: margin + 'px',
