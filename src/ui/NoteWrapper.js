@@ -9,7 +9,7 @@ export default function NoteWrapper({children, backgroundColor, contentEditable}
 
     return (
         <div
-            className={classNames(className)}
+            className={className}
             style={{ backgroundColor }} 
         >
             {children}
