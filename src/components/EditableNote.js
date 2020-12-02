@@ -53,12 +53,12 @@ class Note extends React.Component {
                     onChange={(value) => this.props.changeNoteDescription(noteId, value)}
                 />
                 <FlexBox margin={5} position={flexPositions.center}>
-                            <ColorPicker
-                                changeColor={(activeColor) => this.props.changeNoteColor(noteId, activeColor)}
-                                colors={this.props.colorPicker}
-                                selectedColor={color}
-                            />
-                        </FlexBox>
+                    <ColorPicker
+                        changeColor={(activeColor) => this.props.changeNoteColor(noteId, activeColor)}
+                        colors={this.props.colorPicker}
+                        selectedColor={color}
+                    />
+                </FlexBox>
                 <FlexBox margin={0} position={flexPositions.center}>
                     <Button
                         onClick={
